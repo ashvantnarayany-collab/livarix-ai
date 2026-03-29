@@ -1,13 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Livarix AI — Cancer Detection</title>
-    <meta name="description" content="AI-powered cancer detection across 6 cancer types with instant heatmap visualization" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Livarix AI — Cancer Detection & Reporting</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫁</text></svg>"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="src/styles/main.css"/>
+</head>
+<body>
+  <div id="app">
+    <!-- Login Screen -->
+    <div id="loginScreen" class="screen active">
+      <div class="login-bg">
+        <div class="bg-blob b1"></div>
+        <div class="bg-blob b2"></div>
+        <div class="bg-blob b3"></div>
+      </div>
+      <div class="login-wrap">
+        <div class="login-left">
+          <div class="brand-logo">
+            <svg viewBox="0 0 80 80" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Lung design -->
+              <path d="M40 12 C40 12 30 14 24 22 C18 30 16 40 18 50 C20 58 26 64 32 64 C36 64 38 60 38 56 L38 30 C38 28 39 26 40 26 C41 26 42 28 42 30 L42 56 C42 60 44 64 48 64 C54 64 60 58 62 50 C64 40 62 30 56 22 C50 14 40 12 40 12Z" fill="url(#lg1)" opacity="0.9"/>
+              <path d="M32 36 C28 36 24 38 22 42 C20 46 22 52 26 54 C28 55 30 54 30 52 L30 40 C30 38 31 36 32 36Z" fill="url(#lg2)" opacity="0.7"/>
+              <path d="M48 36 C52 36 56 38 58 42 C60 46 58 52 54 54 C52 55 50 54 50 52 L50 40 C50 38 49 36 48 36Z" fill="url(#lg2)" opacity="0.7"/>
+              <!-- AI scan grid -->
+              <line x1="20" y1="44" x2="60" y2="44" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+              <line x1="20" y1="50" x2="60" y2="50" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+              <line x1="30" y1="30" x2="30" y2="64" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+              <line x1="40" y1="26" x2="40" y2="64" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+              <line x1="50" y1="30" x2="50" y2="64" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+              <!-- Checkmark -->
+              <circle cx="58" cy="22" r="10" fill="url(#ckg)"/>
+              <polyline points="53,22 57,26 64,18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <defs>
+                <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#0EA5E9"/>
+                  <stop offset="100%" stop-color="#0D9488"/>
+                </linearGradient>
+                <linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#38BDF8"/>
+                  <stop offset="100%" stop-color="#2DD4BF"/>
+                </linearGradient>
+                <linearGradient id="ckg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#0369A1"/>
+                  <stop offset="100%" stop-color="#0E7490"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h1 class="brand-name">LIVARIX <span>AI</span></h1>
+          <p class="brand-tagline">AI Cancer Detection & Reporting</p>
+          <div class="brand-divider"></div>
+          <div class="login-features">
+            <div class="feat-item"><span class="feat-icon">🫁</span><span>Lung Cancer Detection</span></div>
+            <div class="feat-item"><span class="feat-icon">🩺</span><span>Liver Cancer Detection</span></div>
+            <div class="feat-item"><span class="feat-icon">📄</span><span>AI-Powered PDF Reports</span></div>
+            <div class="feat-item"><span class="feat-icon">🔬</span><span>High-Accuracy Deep Learning</span></div>
+          </div>
+          <div class="founders-strip">
+            <div class="founder-chip">
+              <div class="founder-avatar av1">AY</div>
+              <div>
+                <div class="fnd-name">Ashvant Narayan Y</div>
+                <div class="fnd-role">Founder · AI/ML Engineer</div>
+              </div>
+            </div>
+            <div class="founder-chip">
+              <div class="founder-avatar av2">DY</div>
+              <div>
+                <div class="fnd-name">Dhivesh Y S</div>
+                <div class="fnd-role">Co-founder · Business Analyst</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="login-right">
+          <div class="login-card">
+            <h2>Sign In</h2>
+            <p class="login-subtitle">Access Livarix AI diagnostic platform</p>
+            <div class="form-group">
+              <label>User ID</label>
+              <input type="text" id="loginUser" placeholder="Enter your User ID" autocomplete="username"/>
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" id="loginPass" placeholder="Enter your password" autocomplete="current-password"/>
+            </div>
+            <div id="loginError" class="login-error"></div>
+            <button class="btn-primary" onclick="doLogin()">Sign In →</button>
+            <div class="login-demo-hint">
+              <strong>Demo Access:</strong> User ID: <code>123</code> · Password: <code>123</code>
+            </div>
+            <div class="plan-badges">
+              <span class="plan-badge free">Free Plan</span>
+              <span class="plan-badge premium">Premium Plan</span>
+              <span style="font-size:11px;color:#888">Both accessible with demo credentials</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboardScreen" class="screen">
+      <nav class="navbar">
+        <div class="nav-brand">
+          <svg viewBox="0 0 40 40" width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6C20 6 15 7 12 11C9 15 8 20 9 25C10 29 13 32 16 32C18 32 19 30 19 28L19 15C19 14 19.5 13 20 13C20.5 13 21 14 21 15L21 28C21 30 22 32 24 32C27 32 30 29 31 25C32 20 31 15 28 11C25 7 20 6 20 6Z" fill="url(#navlg)"/>
+            <circle cx="29" cy="11" r="5" fill="#0369A1"/>
+            <polyline points="26.5,11 28.5,13 32,9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <defs><linearGradient id="navlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0EA5E9"/><stop offset="100%" stop-color="#0D9488"/></linearGradient></defs>
+          </svg>
+          <span>LIVARIX <strong>AI</strong></span>
+        </div>
+        <div class="nav-tabs">
+          <button class="nav-tab active" onclick="showTab('upload')">🔬 New Scan</button>
+          <button class="nav-tab" onclick="showTab('history')">📋 History</button>
+          <button class="nav-tab" onclick="showTab('about')">👥 About</button>
+        </div>
+        <div class="nav-right">
+          <div class="plan-indicator" id="planIndicator">Free Plan</div>
+          <button class="btn-upgrade" onclick="togglePlan()" id="upgradeBtn">Upgrade to Premium</button>
+          <button class="btn-logout" onclick="doLogout()">Logout</button>
+        </div>
+      </nav>
+
+      <!-- Upload / Scan Tab -->
+      <div id="tabUpload" class="tab-content active">
+        <div class="upload-hero">
+          <h2>AI Cancer Detection</h2>
+          <p>Upload medical imaging scans for instant AI-powered analysis</p>
+        </div>
+        <div class="scan-type-select">
+          <div class="scan-card" id="cardLung" onclick="selectCancer('lung')">
+            <div class="scan-icon lung-icon">🫁</div>
+            <h3>Lung Cancer</h3>
+            <p>CT scan analysis for pulmonary nodules, masses, and malignancy detection</p>
+            <div class="scan-accuracy">Model Accuracy: 94.2%</div>
+            <div class="scan-color-dot lung-dot"></div>
+          </div>
+          <div class="scan-card" id="cardLiver" onclick="selectCancer('liver')">
+            <div class="scan-icon liver-icon">🩺</div>
+            <h3>Liver Cancer</h3>
+            <p>CT/MRI scan analysis for hepatocellular carcinoma and liver lesion detection</p>
+            <div class="scan-accuracy">Model Accuracy: 92.8%</div>
+            <div class="scan-color-dot liver-dot"></div>
+          </div>
+        </div>
+
+        <div id="uploadSection" class="upload-section" style="display:none">
+          <div class="upload-header">
+            <h3 id="uploadTitle">Upload Scan</h3>
+            <button class="btn-back" onclick="clearSelection()">← Change Type</button>
+          </div>
+          <div class="patient-form">
+            <h4>Patient Information</h4>
+            <div class="form-row">
+              <div class="form-group"><label>Patient Name</label><input type="text" id="patientName" placeholder="Full name"/></div>
+              <div class="form-group"><label>Age</label><input type="number" id="patientAge" placeholder="Age" min="1" max="120"/></div>
+              <div class="form-group"><label>Sex</label>
+                <select id="patientSex"><option value="">Select</option><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>MRN / Patient ID</label><input type="text" id="patientMRN" placeholder="MRN-000000"/></div>
+              <div class="form-group"><label>Referring Doctor</label><input type="text" id="refDoctor" placeholder="Dr. Name, Speciality"/></div>
+              <div class="form-group"><label>Clinical History</label><input type="text" id="clinicalHistory" placeholder="Brief clinical notes"/></div>
+            </div>
+          </div>
+          <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()" 
+               ondragover="event.preventDefault();this.classList.add('drag-over')"
+               ondragleave="this.classList.remove('drag-over')"
+               ondrop="handleDrop(event)">
+            <div class="drop-icon">📁</div>
+            <div class="drop-text">Drop scan image here or click to browse</div>
+            <div class="drop-sub">Supports: PNG, JPG, JPEG, DICOM (displayed as image)</div>
+            <input type="file" id="fileInput" accept="image/*,.dcm" hidden onchange="handleFileSelect(event)"/>
+          </div>
+          <div id="previewSection" style="display:none">
+            <img id="previewImg" class="preview-img" alt="Scan preview"/>
+            <button class="btn-analyze" onclick="analyzeScan()">
+              <span id="analyzeText">🔬 Analyze with Livarix AI</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Result Section -->
+        <div id="resultSection" style="display:none">
+          <div class="result-card" id="resultCard">
+            <div class="result-header" id="resultHeader">
+              <div class="result-badge" id="resultBadge">ANALYZING...</div>
+              <div class="result-type" id="resultTypeLabel"></div>
+            </div>
+            <div class="result-body">
+              <div class="result-grid">
+                <div class="res-metric">
+                  <div class="res-val" id="resConfidence">--</div>
+                  <div class="res-lbl">Confidence</div>
+                </div>
+                <div class="res-metric">
+                  <div class="res-val" id="resPrediction">--</div>
+                  <div class="res-lbl">Prediction</div>
+                </div>
+                <div class="res-metric">
+                  <div class="res-val" id="resStage">--</div>
+                  <div class="res-lbl">Stage</div>
+                </div>
+                <div class="res-metric">
+                  <div class="res-val" id="resRisk">--</div>
+                  <div class="res-lbl">Risk Level</div>
+                </div>
+              </div>
+              <div class="conf-bars" id="confBars"></div>
+              <div class="result-findings" id="resultFindings"></div>
+              <div class="report-actions">
+                <button class="btn-report free-report" onclick="generateReport('free')">📄 Generate Free Report</button>
+                <button class="btn-report premium-report" onclick="generateReport('premium')">⭐ Generate Premium Report <span class="prem-tag">PDF</span></button>
+              </div>
+              <div id="premiumNote" class="premium-note" style="display:none">
+                ⭐ You have Premium access — enjoy full detailed PDF reports!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- History Tab -->
+      <div id="tabHistory" class="tab-content">
+        <div class="history-header">
+          <h2>Scan History</h2>
+          <p>Previously analyzed scans in this session</p>
+        </div>
+        <div id="historyList" class="history-list">
+          <div class="history-empty">No scans yet. Upload a scan to get started.</div>
+        </div>
+      </div>
+
+      <!-- About Tab -->
+      <div id="tabAbout" class="tab-content">
+        <div class="about-wrap">
+          <div class="about-hero">
+            <div class="about-logo-big">
+              <svg viewBox="0 0 80 80" width="72" height="72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M40 12C40 12 30 14 24 22C18 30 16 40 18 50C20 58 26 64 32 64C36 64 38 60 38 56L38 30C38 28 39 26 40 26C41 26 42 28 42 30L42 56C42 60 44 64 48 64C54 64 60 58 62 50C64 40 62 30 56 22C50 14 40 12 40 12Z" fill="url(#abl)"/>
+                <circle cx="58" cy="22" r="10" fill="#0369A1"/>
+                <polyline points="53,22 57,26 64,18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <defs><linearGradient id="abl" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0EA5E9"/><stop offset="100%" stop-color="#0D9488"/></linearGradient></defs>
+              </svg>
+            </div>
+            <h2 class="about-title">LIVARIX AI</h2>
+            <p class="about-tagline">AI Cancer Detection & Reporting Platform</p>
+            <p class="about-desc">Livarix AI uses state-of-the-art deep learning models trained on thousands of medical scans to assist clinicians with early cancer detection and reporting. Currently supporting lung and liver cancer detection with more types coming soon.</p>
+          </div>
+          <div class="team-section">
+            <h3>Our Team</h3>
+            <div class="team-grid">
+              <div class="team-card founder-card">
+                <div class="team-avatar av-founder">AY</div>
+                <div class="team-info">
+                  <div class="team-name">Ashvant Narayan Y</div>
+                  <div class="team-role">Founder & AI/ML Engineer</div>
+                  <div class="team-desc">Leads the AI model development, medical imaging research, and system architecture for Livarix AI.</div>
+                  <div class="team-tags"><span>Deep Learning</span><span>Medical Imaging</span><span>Python</span></div>
+                </div>
+              </div>
+              <div class="team-card cofounder-card">
+                <div class="team-avatar av-cofounder">DY</div>
+                <div class="team-info">
+                  <div class="team-name">Dhivesh Y S</div>
+                  <div class="team-role">Co-founder & Business Analyst</div>
+                  <div class="team-desc">Drives business strategy, product roadmap, and healthcare partnerships for Livarix AI.</div>
+                  <div class="team-tags"><span>Business Strategy</span><span>Healthcare</span><span>Analytics</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tech-section">
+            <h3>Technology Stack</h3>
+            <div class="tech-grid">
+              <div class="tech-chip">PyTorch</div>
+              <div class="tech-chip">EfficientNet</div>
+              <div class="tech-chip">HuggingFace</div>
+              <div class="tech-chip">FastAPI</div>
+              <div class="tech-chip">React/Vite</div>
+              <div class="tech-chip">Vercel</div>
+              <div class="tech-chip">pdfmake</div>
+              <div class="tech-chip">DICOM</div>
+            </div>
+          </div>
+          <div class="disclaimer-box">
+            <strong>⚠️ Medical Disclaimer:</strong> Livarix AI is an AI-assisted diagnostic aid and is NOT a substitute for professional medical judgment. All AI findings must be reviewed and validated by a qualified radiologist or clinician before clinical decisions are made.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading overlay -->
+  <div id="loadingOverlay" class="loading-overlay" style="display:none">
+    <div class="loading-card">
+      <div class="loading-spinner"></div>
+      <div class="loading-text" id="loadingText">Analyzing scan...</div>
+      <div class="loading-sub">Livarix AI is processing your image</div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+  <script src="src/utils/api.js"></script>
+  <script src="src/utils/report.js"></script>
+  <script src="src/utils/app.js"></script>
+</body>
 </html>
